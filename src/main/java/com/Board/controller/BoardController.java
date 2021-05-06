@@ -166,13 +166,11 @@ public class BoardController {
 	}
 	
 	/*
-	 * select all 기능의 공통화를 위한 controller
-	 * view에 table을 그려 주기 위한 header(column)정보
-	 * body(row list)값을 return 한다
+	 * delete 기능의 공통화를 위한 controller
+	 * delete 버튼을 눌렀을 때 해당 데이터를 삭제 한다
 	 */
 	@RequestMapping(value="/deleteTable", method = RequestMethod.GET)
 	public void deleteTable(String table, String idx) {
-		System.out.println(table+idx);
 		nativesqlservice.deleteSQL(table, idx);
 	}
 }
