@@ -8,5 +8,7 @@ public interface NativeSQLService {
 	List<Object[]> selectAll(String table);
 	
 	void insertSQL(Map<String, Object> insertValue);
+	
+	void deleteSQL(String table, String idx);
 
 }

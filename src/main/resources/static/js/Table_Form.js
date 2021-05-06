@@ -5,7 +5,6 @@ function createtable(tableName) {
 		url: "/viewtable",
 		data : "table=" + tableName,
 		success: function (tableData) {
-			console.log(tableData);
 			//table column data
 			var tableHeader = tableData.tableinfo;
 			//table row_list data

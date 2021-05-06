@@ -119,7 +119,7 @@ public class BoardController {
 	 * body(row list)값을 return 한다
 	 */
 	@RequestMapping(value="/viewtable", method = RequestMethod.GET)
-	public ModelAndView viewtable(String table) {
+	public ModelAndView viewTable(String table) {
 		
 		ModelAndView tableData = new ModelAndView();
 		tableData.setView(new MappingJackson2JsonView());
@@ -148,13 +148,15 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/ajaxwrite.do", method = RequestMethod.GET)
-	public void ajaxwrite(TestUsersEntity user) {
+	public String ajaxwrite(TestUsersEntity user) {
 		testusersservice.usercreate(user);
+		return "bbb";
 	}
 	
 	@RequestMapping(value="/ajaxwriteboard.do", method = RequestMethod.GET)
-	public void ajaxwriteboard(TestBoardEntity user) {
+	public String ajaxwriteboard(TestBoardEntity user) {
 		testboardservice.boardcreate(user);
+		return "aaa";
 	}
 	
 	@RequestMapping(value="/ajaxInsert", method = RequestMethod.GET)
@@ -163,4 +165,14 @@ public class BoardController {
 		System.out.println(insertValue);
 	}
 	
+	/*
+	 * select all 기능의 공통화를 위한 controller
+	 * view에 table을 그려 주기 위한 header(column)정보
+	 * body(row list)값을 return 한다
+	 */
+	@RequestMapping(value="/deleteTable", method = RequestMethod.GET)
+	public void deleteTable(String table, String idx) {
+		System.out.println(table+idx);
+		nativesqlservice.deleteSQL(table, idx);
+	}
 }

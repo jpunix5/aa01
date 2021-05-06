@@ -21,8 +21,8 @@ function userCreate(tableName) {
 //		url: "/ajaxInsert",
 		url: urladd,
 		data : user,
-		success: function () {
-			
+		success: function (tableName) {
+			console.log(tableName);
 		}
 //		, error : function(request,status,error){
 //			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
