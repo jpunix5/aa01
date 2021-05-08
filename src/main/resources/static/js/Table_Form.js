@@ -40,10 +40,19 @@ function TableBody(tableHeader, tableBody, tableName) {
 	for (var n in tableBody) {
 		str += "<tr>";
 		for (var k in tableHeader) {
-			
-			str += "<td>" + tableBody[n][k] + "</td>";
-
-		}
+			if('Date' == tableHeader[k].columntype){
+				var targetStr = tableBody[n][k];
+				console.log(targetStr);
+				var date = new Date(targetStr);
+				console.log(date);
+//				var calendarB = /\d{4}-\d{2}-\d{2}/.exec(targetStr);
+//				var calendarA = new date(targetStr * 1000);
+//				console.log(calendarA);	
+				str += "<td>" + date + "</td>";
+			}else{
+				str += "<td>" + tableBody[n][k] + "</td>";
+			}
+		};
 		str += "<td><button type=\"button\" id=\"updatebutton\" onclick=\"updatePopupOpen(" + tableBody[n][0] +  ", '" + tableName + "' )\">update</button></td>"
 		str += "<td><button type=\"button\" id=\"deletebutton\" onclick=\"deletethis(" + tableBody[n][0] + ", '" + tableName + "' )\">delete</button></td>"
         str += "</tr>";

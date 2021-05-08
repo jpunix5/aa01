@@ -35,7 +35,10 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		
 	}
 	
+	//transactional 기본은 rollback 인걸로 알고 있으나 commit 됨.
+	//예상은 db auto commit 때문인가?
 	@Transactional
+	//modifying - update delete를 수행 하기 위한 @
 	@Modifying
 	@Override
 	public void deleteSQL(String table, String idx) {
