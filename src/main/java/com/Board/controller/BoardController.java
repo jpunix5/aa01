@@ -160,9 +160,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/ajaxInsert", method = RequestMethod.GET)
-	public void ajaxinsert(Map<Object, Object> insertValue) {
+	public void ajaxinsert(String idx, String title, String write_date) {
 //		nativesqlservice.insertSQL(insertValue);
-		System.out.println(insertValue);
+		System.out.println(idx);
+		System.out.println(title);
+		System.out.println(write_date);
 	}
 	
 	/*

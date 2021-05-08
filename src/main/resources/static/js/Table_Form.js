@@ -25,7 +25,7 @@ function createtable(tableName) {
 };
 
 function TableHeader(tableHeader) {
-	str = "<tr>";
+	str = "<tr class=\"bg-test01 text-test01\">";
 	for (var i in tableHeader) {
 		str += "<th>" + tableHeader[i].columnname + "</th>";
 	}
@@ -38,17 +38,13 @@ function TableBody(tableHeader, tableBody, tableName) {
 	var str = "";
 	
 	for (var n in tableBody) {
-		str += "<tr>";
+		str += "<tr class=\"bg-test02\">";
 		for (var k in tableHeader) {
 			if('Date' == tableHeader[k].columntype){
 				var targetStr = tableBody[n][k];
-				console.log(targetStr);
 				var date = new Date(targetStr);
 				var dateformat = date.getFullYear()+"년"+(date.getMonth()+1)+"월"+date.getDate()+"일"
-				console.log(date);
-//				var calendarB = /\d{4}-\d{2}-\d{2}/.exec(targetStr);
-//				var calendarA = new date(targetStr * 1000);
-//				console.log(calendarA);	
+				
 				str += "<td>" + dateformat + "</td>";
 			}else{
 				str += "<td>" + tableBody[n][k] + "</td>";

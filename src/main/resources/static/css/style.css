@@ -799,6 +799,30 @@ h4 strong {
 .bg-orange {
   background-color: #ff460b !important;
 }
+
+
+/* ---------------------------------------------- 
+	custom colors
+	Background and text 
+---------------------------------------------- */
+.bg-test01{
+  background-color: #6610f2 !important;
+}
+.text-test01 {
+  color: #fd7e14 !important;
+}
+.bg-test02{
+  background-color: #e0cffc !important;
+}
+.text-test02 {
+  color: #e685b5 !important;
+}
+
+/* ---------------------------------------------- 
+---------------------------------------------- */
+
+
+
 /* Text colors */
 .text-custom {
   color: #6200ea !important;
