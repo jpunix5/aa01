@@ -44,11 +44,12 @@ function TableBody(tableHeader, tableBody, tableName) {
 				var targetStr = tableBody[n][k];
 				console.log(targetStr);
 				var date = new Date(targetStr);
+				var dateformat = date.getFullYear()+"년"+(date.getMonth()+1)+"월"+date.getDate()+"일"
 				console.log(date);
 //				var calendarB = /\d{4}-\d{2}-\d{2}/.exec(targetStr);
 //				var calendarA = new date(targetStr * 1000);
 //				console.log(calendarA);	
-				str += "<td>" + date + "</td>";
+				str += "<td>" + dateformat + "</td>";
 			}else{
 				str += "<td>" + tableBody[n][k] + "</td>";
 			}
