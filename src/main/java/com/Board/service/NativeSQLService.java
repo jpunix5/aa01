@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface NativeSQLService {
 	
-	List<Object[]> selectAll(String table);
+	List<Object[]> selectAll(String table, int startPageNo, int perPageCn);
 	
 	void insertSQL(Map<String, Object> insertValue);
 	

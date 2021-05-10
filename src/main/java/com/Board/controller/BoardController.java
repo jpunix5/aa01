@@ -21,6 +21,7 @@ import com.Board.service.TestUsersService;
 import com.Board.entities.TableColumnEntity;
 import com.Board.entities.TestBoardEntity;
 import com.Board.entities.TestUsersEntity;
+import com.Board.page.PageObject;
 
 @Controller
 public class BoardController {
@@ -124,12 +125,15 @@ public class BoardController {
 		ModelAndView tableData = new ModelAndView();
 		tableData.setView(new MappingJackson2JsonView());
 		
+		//paging info
+		PageObject pageObject = new PageObject();
+		
 		//table column info
 		List<TableColumnEntity> tableinfo = tablecolumnservice.findByTable(table);
 		tableData.addObject("tableinfo", tableinfo);
 		
 		//table row_list data
-        List<Object[]> resultlist = nativesqlservice.selectAll(table);
+        List<Object[]> resultlist = nativesqlservice.selectAll(table, pageObject.getNowPageNo(), pageObject.getPerPageCn());
         tableData.addObject("users", resultlist);
 
         return tableData;
@@ -160,11 +164,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/ajaxInsert", method = RequestMethod.GET)
-	public void ajaxinsert(String idx, String title, String write_date) {
+	public void ajaxinsert(Map<String, String> aaa) {
 //		nativesqlservice.insertSQL(insertValue);
-		System.out.println(idx);
-		System.out.println(title);
-		System.out.println(write_date);
+		System.out.println("aaa");
+//		System.out.println(title);
+//		System.out.println(write_date);
 	}
 	
 	/*

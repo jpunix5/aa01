@@ -11,7 +11,7 @@ function createtable(tableName) {
 			var tableBody = tableData.users;
 			//this table_name
 			var tableName = tableHeader[0].tablename;
-
+			
 			//table_header column info
 			TableHeader(tableHeader);
 			

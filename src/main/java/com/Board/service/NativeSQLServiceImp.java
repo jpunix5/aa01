@@ -18,11 +18,15 @@ public class NativeSQLServiceImp implements NativeSQLService {
 	private EntityManager em;
 
 	@Override
-	public List<Object[]> selectAll(String table) {
+	public List<Object[]> selectAll(String table, int startPageNo, int perPageCn) {
 		StringBuilder sql = new StringBuilder();
 		        
         sql.append("select * from ");
         sql.append(table);
+        sql.append(" limit ");
+        sql.append(startPageNo);
+        sql.append(" , ");
+        sql.append(perPageCn);
         
         Query query = em.createNativeQuery(sql.toString());
         List<Object[]> resultlist = query.getResultList();

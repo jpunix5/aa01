@@ -1,14 +1,15 @@
 //row insert
 function userCreate(tableName) {
-	var user = $("#Insert_Form").serialize();
-//	var user = $("#Insert_Form").serializeObject();
+//	var user = $("#Insert_Form").serialize();
+	var user = $("#Insert_Form").serializeObject();
 //	var user = $("#Insert_Form").serializeArray();
 	
 //	console.log("111===============");
 //	console.log(typeof user);
 //	console.log("===============");
 //	console.log(user);
-//	console.log("111===============");
+	console.log(user[0]);
+	console.log(user[1]);
 	
 //	if('test_users' == tableName){
 //		urladd = "/ajaxwrite.do";
