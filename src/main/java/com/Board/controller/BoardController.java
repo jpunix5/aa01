@@ -135,6 +135,10 @@ public class BoardController {
 		//table row_list data
         List<Object[]> resultlist = nativesqlservice.selectAll(table, pageObject.getNowPageNo(), pageObject.getPerPageCn());
         tableData.addObject("users", resultlist);
+        
+        //paging info
+        int pageTotalCN = nativesqlservice.totalCount(table);
+        tableData.addObject("totalCN", pageTotalCN);
 
         return tableData;
 	}

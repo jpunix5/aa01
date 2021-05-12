@@ -11,7 +11,11 @@ function createtable(tableName) {
 			var tableBody = tableData.users;
 			//this table_name
 			var tableName = tableHeader[0].tablename;
-			
+			//paging parameter
+			var totalCN = tableData.totalCN;
+			var perPage = 3;
+			var startPage = 1;  //시작페이지
+            
 			//table_header column info
 			TableHeader(tableHeader);
 			
@@ -20,6 +24,13 @@ function createtable(tableName) {
 			
 			//insert_form
 			InsertForm(tableHeader, tableName);
+			
+			//pageing process
+			str = "";
+            for(var i=startPage; i<=(totalCN/perPage)+1; i++){
+               str += "<a th:text=\"" + i + "\"></a>"
+            };
+            $("#pagination justify-content-center").html(str);
 		}
 	});
 };

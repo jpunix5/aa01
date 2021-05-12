@@ -57,5 +57,17 @@ public class NativeSQLServiceImp implements NativeSQLService {
         query.executeUpdate();
 //        List<Object[]> resultlist = query.getResultList();
 	}
+	
+	public int totalCount(String table) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("select count(*) from ");
+		sql.append(table);
+		
+		Query query = em.createNativeQuery(sql.toString());
+        int resultlist = ((Number) query.getSingleResult()).intValue();
+        
+		return resultlist;
+	}
 
 }

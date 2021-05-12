@@ -10,5 +10,7 @@ public interface NativeSQLService {
 	void insertSQL(Map<String, Object> insertValue);
 	
 	void deleteSQL(String table, String idx);
+	
+	int totalCount(String table);
 
 }
