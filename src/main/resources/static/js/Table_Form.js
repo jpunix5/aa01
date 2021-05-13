@@ -15,7 +15,7 @@ function createtable(tableName, nowPageNo) {
 			var totalCN = tableData.totalCN;
 			var perPage = 3;
 			var startPage = 1;  //시작페이지
-            
+			
 			//table_header column info
 			TableHeader(tableHeader);
 			
@@ -28,7 +28,9 @@ function createtable(tableName, nowPageNo) {
 			//pageing process
 			str = "";
             for(var i=startPage; i<=(totalCN/perPage)+1; i++){
-               str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>"
+//              str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>"
+//            	str += "<li class=\"page-item\"><a class=\"page-link\" href=\"createtable('" + tableName + "', " + i + ")\">" + i + "</a></li>"
+            	str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"createtable('" + tableName + "', " + i + ")\">" + i + "</a></li>"
             };
             $("#page-num").html(str);
 		}
