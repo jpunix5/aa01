@@ -120,26 +120,28 @@ public class BoardController {
 	 * body(row list)값을 return 한다
 	 */
 	@RequestMapping(value="/viewtable", method = RequestMethod.GET)
-	public ModelAndView viewTable(String table) {
+	public ModelAndView viewTable(String table, Integer nowPageNo) {
 		
 		ModelAndView tableData = new ModelAndView();
 		tableData.setView(new MappingJackson2JsonView());
 		
-		//paging info
+		//paging item
 		PageObject pageObject = new PageObject();
+		Integer startPageNo = (nowPageNo - 1) * pageObject.getPerPageCn();
+		pageObject.setStartPageNo(startPageNo);
 		
 		//table column info
 		List<TableColumnEntity> tableinfo = tablecolumnservice.findByTable(table);
 		tableData.addObject("tableinfo", tableinfo);
 		
-		//table row_list data
-        List<Object[]> resultlist = nativesqlservice.selectAll(table, pageObject.getNowPageNo(), pageObject.getPerPageCn());
-        tableData.addObject("users", resultlist);
-        
-        //paging info
+		//paging info
         int pageTotalCN = nativesqlservice.totalCount(table);
         tableData.addObject("totalCN", pageTotalCN);
-
+		
+        //table row_list data
+        List<Object[]> resultlist = nativesqlservice.selectAll(table, pageObject.getStartPageNo(), pageObject.getPerPageCn());
+        tableData.addObject("users", resultlist);
+        
         return tableData;
 	}
 	

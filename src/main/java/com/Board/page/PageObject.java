@@ -10,7 +10,7 @@ public class PageObject {
 	private int endPageNo;
 	
 	public PageObject() {
-		this.nowPageNo = 1;
+		this.startPageNo = 0;
 		this.perPageCn = 3;
 	}
 	

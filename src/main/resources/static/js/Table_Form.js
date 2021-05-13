@@ -1,9 +1,9 @@
 //view Table
-function createtable(tableName) {
+function createtable(tableName, nowPageNo) {
 	$.ajax({
 		type: "GET",
 		url: "/viewtable",
-		data : "table=" + tableName,
+		data : "table=" + tableName + "&" + "nowPageNo=" + nowPageNo,
 		success: function (tableData) {
 			//table column data
 			var tableHeader = tableData.tableinfo;
@@ -28,9 +28,9 @@ function createtable(tableName) {
 			//pageing process
 			str = "";
             for(var i=startPage; i<=(totalCN/perPage)+1; i++){
-               str += "<a th:text=\"" + i + "\"></a>"
+               str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>"
             };
-            $("#pagination justify-content-center").html(str);
+            $("#page-num").html(str);
 		}
 	});
 };

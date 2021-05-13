@@ -8,19 +8,19 @@ function userCreate(tableName) {
 //	console.log(typeof user);
 //	console.log("===============");
 //	console.log(user);
-	console.log(user[0]);
-	console.log(user[1]);
+//	console.log(user[0]);
+//	console.log(user[1]);
 	
-//	if('test_users' == tableName){
-//		urladd = "/ajaxwrite.do";
-//	}else if('test_board' == tableName){
-//		urladd = "/ajaxwriteboard.do";
-//	};
+	if('test_users' == tableName){
+		urladd = "/ajaxwrite.do";
+	}else if('test_board' == tableName){
+		urladd = "/ajaxwriteboard.do";
+	};
 	
 	$.ajax({
 		type: "GET",
-		url: "/ajaxInsert",
-//		url: urladd,
+//		url: "/ajaxInsert",
+		url: urladd,
 		data : user,
 		success: function (tableName) {
 			console.log(tableName);
