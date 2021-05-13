@@ -1,9 +1,9 @@
 //view Table
-function createtable(tableName, nowPageNo) {
+function createtable(tableName, nowPageNo, perPageCn) {
 	$.ajax({
 		type: "GET",
 		url: "/viewtable",
-		data : "table=" + tableName + "&" + "nowPageNo=" + nowPageNo,
+		data : "table=" + tableName + "&" + "nowPageNo=" + nowPageNo + "&" + "perPageCn=" + perPageCn,
 		success: function (tableData) {
 			//table column data
 			var tableHeader = tableData.tableinfo;
@@ -13,7 +13,7 @@ function createtable(tableName, nowPageNo) {
 			var tableName = tableHeader[0].tablename;
 			//paging parameter
 			var totalCN = tableData.totalCN;
-			var perPage = 3;
+			var perPage = tableData.perPageCn;
 			var startPage = 1;  //시작페이지
 			
 			//table_header column info
@@ -30,7 +30,7 @@ function createtable(tableName, nowPageNo) {
             for(var i=startPage; i<=(totalCN/perPage)+1; i++){
 //              str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>"
 //            	str += "<li class=\"page-item\"><a class=\"page-link\" href=\"createtable('" + tableName + "', " + i + ")\">" + i + "</a></li>"
-            	str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"createtable('" + tableName + "', " + i + ")\">" + i + "</a></li>"
+            	str += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"createtable('" + tableName + "', " + i + ", " + perPage + ")\">" + i + "</a></li>"
             };
             $("#page-num").html(str);
 		}

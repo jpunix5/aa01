@@ -120,13 +120,14 @@ public class BoardController {
 	 * body(row list)값을 return 한다
 	 */
 	@RequestMapping(value="/viewtable", method = RequestMethod.GET)
-	public ModelAndView viewTable(String table, Integer nowPageNo) {
+	public ModelAndView viewTable(String table, Integer nowPageNo, Integer perPageCn) {
 		
 		ModelAndView tableData = new ModelAndView();
 		tableData.setView(new MappingJackson2JsonView());
 		
 		//paging item
 		PageObject pageObject = new PageObject();
+		pageObject.setPerPageCn(perPageCn);
 		Integer startPageNo = (nowPageNo - 1) * pageObject.getPerPageCn();
 		pageObject.setStartPageNo(startPageNo);
 		
@@ -137,6 +138,7 @@ public class BoardController {
 		//paging info
         int pageTotalCN = nativesqlservice.totalCount(table);
         tableData.addObject("totalCN", pageTotalCN);
+        tableData.addObject("perPageCn", perPageCn);
 		
         //table row_list data
         List<Object[]> resultlist = nativesqlservice.selectAll(table, pageObject.getStartPageNo(), pageObject.getPerPageCn());
