@@ -1,16 +1,21 @@
 package com.Board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -159,8 +164,8 @@ public class BoardController {
 		testboardservice.boarddelete(idx);
 	}
 
-	@RequestMapping(value="/ajaxwrite.do", method = RequestMethod.GET)
-	public String ajaxwrite(TestUsersEntity user) {
+	@RequestMapping(value="/ajaxwrite.do", method = RequestMethod.POST)
+	public String ajaxwrite(@RequestBody TestUsersEntity user) {
 		testusersservice.usercreate(user);
 		return "bbb";
 	}
@@ -171,13 +176,22 @@ public class BoardController {
 		return "aaa";
 	}
 	
-	@RequestMapping(value="/ajaxInsert", method = RequestMethod.GET)
-	public void ajaxinsert(Map<String, String> aaa) {
+	
+/*-----------------------------------------------------------------------
+ * 해당 insert 기능은 @RestController 에서 처리 하기 위해 BoardAjaxController에서 처리
+ * 
+	@RequestMapping(value="/ajaxInsert")
+//	public void ajaxinsert(HttpServletRequest model) {
+	public void ajaxinsert(HashMap<String, String> model) {
+//	public void ajaxinsert(@RequestBody TestBoardEntity model) {
 //		nativesqlservice.insertSQL(insertValue);
-		System.out.println("aaa");
-//		System.out.println(title);
+		System.out.println("111");
+		System.out.println(model);
+		System.out.println("222");
 //		System.out.println(write_date);
 	}
+-----------------------------------------------------------------------*/	
+	
 	
 	/*
 	 * delete 기능의 공통화를 위한 controller

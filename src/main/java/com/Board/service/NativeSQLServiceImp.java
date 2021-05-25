@@ -1,5 +1,6 @@
 package com.Board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +35,6 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		return resultlist;
 	}
 	
-	@Override
-	public void insertSQL(Map<String, Object> insertvalue) {
-		
-	}
-	
 	//transactional 기본은 rollback 인걸로 알고 있으나 commit 됨.
 	//예상은 db auto commit 때문인가?
 	@Transactional
@@ -68,6 +64,52 @@ public class NativeSQLServiceImp implements NativeSQLService {
         int resultlist = ((Number) query.getSingleResult()).intValue();
         
 		return resultlist;
+	}
+
+	@Transactional
+	@Modifying
+	@Override
+	public String insertSQL(HashMap<String, Object> insertValues) {
+		StringBuilder sql = new StringBuilder();
+		StringBuilder sqlKey = new StringBuilder();
+		StringBuilder sqlValues = new StringBuilder();
+		String tableName = null;
+		
+		sql.append("insert into ");
+        
+		for(String key : insertValues.keySet()){
+		    Object value = insertValues.get(key);
+		    if("tableName" == key) {
+		    	tableName = value.toString();
+		    	sql.append(value);
+		    	sql.append(" (");
+		    }else if("idx" == key) {
+		    	//idx 처리는 db에서 진행함.
+		    }else {
+		    	//insert sql문의 column 값을 작성 한다 
+			    sqlKey.append(key);
+			    sqlKey.append(",");
+			    //insert sql문의 value 값을 작성 한다
+			    sqlValues.append("'");
+			    sqlValues.append(value);
+			    sqlValues.append("',");
+		    };
+		};
+		
+		//insert문 작성을 위해 key문장 values문장 정리
+		sqlKey.deleteCharAt((sqlKey.length()-1));
+		sqlValues.deleteCharAt((sqlValues.length()-1));
+		
+		sql.append(sqlKey);
+		sql.append(") values (");
+		sql.append(sqlValues);
+		sql.append(")");
+		System.out.println(sql);
+        
+        Query query = em.createNativeQuery(sql.toString());
+        query.executeUpdate();
+        
+        return tableName;
 	}
 
 }
