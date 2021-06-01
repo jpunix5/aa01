@@ -144,7 +144,8 @@ public class BoardController {
         int pageTotalCN = nativesqlservice.totalCount(table);
         tableData.addObject("totalCN", pageTotalCN);
         tableData.addObject("perPageCn", perPageCn);
-		
+        tableData.addObject("pageSize",pageObject.getPageSize()); //블록당 페이지 수
+        
         //table row_list data
         List<Object[]> resultlist = nativesqlservice.selectAll(table, pageObject.getStartPageNo(), pageObject.getPerPageCn());
         tableData.addObject("users", resultlist);
