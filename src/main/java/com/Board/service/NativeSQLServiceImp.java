@@ -24,6 +24,7 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		        
         sql.append("select * from ");
         sql.append(table);
+        sql.append(" order by idx desc");
         sql.append(" limit ");
         sql.append(startPageNo);
         sql.append(" , ");
