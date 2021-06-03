@@ -117,14 +117,16 @@
 		
 		strbt += "<td><button type=\"button\" onclick=\"userCreate('" + tableName + "')\">save</button></td>";
 		
-		strbt += "<td><select name=\"페이지당 글개수\" onchange=\"hyper_select(this,'"+tableName+"')\">";  //드롭다운 리스트 생성구간 hyper_select()함수 실행. this,tablename이 있는데, this는 select태그의 option을 전부 가져간다. 
-		strbt += "<option value=\"0\" selected>줄선택</option>";
-		strbt += "<option value=\"3\">3줄씩</option>";
-		strbt += "<option value=\"5\">5줄씩</option>";
-		strbt += "<option value=\"10\">10줄씩</option>";
-		strbt += "</select></td>";
+		var strbt2 = "";
+		strbt2 += "<td><select name=\"페이지당 글개수\" onchange=\"hyper_select(this,'"+tableName+"')\">";  //드롭다운 리스트 생성구간 hyper_select()함수 실행. this,tablename이 있는데, this는 select태그의 option을 전부 가져간다. 
+		strbt2 += "<option value=\"0\" selected>줄선택</option>";
+		strbt2 += "<option value=\"3\">3줄씩</option>";
+		strbt2 += "<option value=\"5\">5줄씩</option>";
+		strbt2 += "<option value=\"10\">10줄씩</option>";
+		strbt2 += "</select></td>";
 	
 		$("#Insert_Form").html(strbt);
+		$("#lineSelect").html(strbt2);
 	};
 	
 	function hyper_select(optional,tableName) {  //위에서 쓰일 hyper_select 함수.  여기선 위에서 받아온 option전부와 tableName을 가져왔다.
