@@ -30,7 +30,7 @@ function updateData(idx, tableHeader, tableBody, tableName) {
 
 				str += "<label>" + tableHeader[k].columnname + "</label>";
 
-				if ('idx' == tableHeader[k].columnname  {
+				if ('idx' == tableHeader[k].columnname)  {
 					str += "<input type='" + tableHeader[k].columntype + "' name= '" + tableHeader[k].columnname + "' value= '" + tableBody[n][tableHeader[k].columnname] + "' disabled /><br>";
 				} else if ('Date' == tableHeader[k].columntype) {
 

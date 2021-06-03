@@ -114,7 +114,7 @@
 				strbt += "<td><input type=" + tableHeader[k].columntype + " placeholder=" + tableHeader[k].columnname + " name=" + tableHeader[k].columnname + "></input></td>";
 			}
 		};
-	
+		
 		strbt += "<td><button type=\"button\" onclick=\"userCreate('" + tableName + "')\">save</button></td>";
 		
 		strbt += "<td><select name=\"페이지당 글개수\" onchange=\"hyper_select(this,'"+tableName+"')\">";  //드롭다운 리스트 생성구간 hyper_select()함수 실행. this,tablename이 있는데, this는 select태그의 option을 전부 가져간다. 
