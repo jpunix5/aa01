@@ -31,5 +31,14 @@ public class BoardAjaxController {
 
 		return nativesqlservice.insertSQL(insertValues);
 	}
+	
+	/*
+	 * update 처리를 위한 controller
+	 */
+	@RequestMapping(value="/ajaxUpdate")
+	public String ajaxUpdate(@RequestBody HashMap<String, Object> updateValues) {
+		
+		return nativesqlservice.updateSQL(updateValues);
+	}
 
 }

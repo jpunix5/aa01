@@ -14,4 +14,6 @@ public interface NativeSQLService {
 	
 	int totalCount(String table);
 
+	String updateSQL(HashMap<String, Object> updateValues);
+
 }

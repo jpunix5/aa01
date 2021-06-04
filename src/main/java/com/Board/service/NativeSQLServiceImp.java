@@ -112,5 +112,43 @@ public class NativeSQLServiceImp implements NativeSQLService {
         
         return tableName;
 	}
+	
+	@Transactional
+	@Modifying
+	@Override
+	public String updateSQL(HashMap<String, Object> updateValues) {
+		StringBuilder sql = new StringBuilder();
+		StringBuilder sqlValues = new StringBuilder();
+		StringBuilder sqlidx = new StringBuilder();
+		String tableName = null;
+		
+		sql.append("update ");
+		
+		for(String key : updateValues.keySet()){
+			Object value = updateValues.get(key);
+		    if("tableName" == key) {
+		    	tableName = value.toString();
+		    	sql.append(value);
+		    	sql.append(" set ");
+		    }else if("idx" == key) {
+		    	sqlidx.append(value);
+		    }else {
+		    	sqlValues.append(key);
+		    	sqlValues.append("='");
+		    	sqlValues.append(value);
+		    	sqlValues.append("',");
+		    }
+		};
+		sqlValues.deleteCharAt((sqlValues.length()-1));
+		sql.append(sqlValues);
+		sql.append(" where idx=");
+		sql.append(sqlidx);
+		System.out.println(sql);
+		
+        Query query = em.createNativeQuery(sql.toString());
+        query.executeUpdate();
+		
+		return tableName;
+	}
 
 }
