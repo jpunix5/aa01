@@ -8,6 +8,8 @@ public interface NativeSQLService {
 	
 	List<Object[]> selectAll(String table, int startPageNo, int perPageCn);
 	
+	List<Object[]> selectAlltable();
+	
 	String insertSQL(HashMap<String, Object> insertValues);
 	
 	void deleteSQL(String table, String idx);
@@ -15,5 +17,7 @@ public interface NativeSQLService {
 	int totalCount(String table);
 
 	String updateSQL(HashMap<String, Object> updateValues);
+
+	String createSQL(HashMap<String, Object> createValues);
 
 }
