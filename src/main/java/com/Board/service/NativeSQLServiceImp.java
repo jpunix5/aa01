@@ -66,6 +66,16 @@ public class NativeSQLServiceImp implements NativeSQLService {
         
 		return resultlist;
 	}
+	
+	
+	@Transactional
+	@Modifying
+	@Override
+	public String createSQL(HashMap<String, Object> createValues) {
+		
+		
+		return null;
+	}
 
 	@Transactional
 	@Modifying
@@ -149,6 +159,12 @@ public class NativeSQLServiceImp implements NativeSQLService {
         query.executeUpdate();
 		
 		return tableName;
+	}
+
+	@Override
+	public List<Object[]> selectAlltable() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

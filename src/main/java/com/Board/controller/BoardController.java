@@ -202,4 +202,21 @@ public class BoardController {
 	public void deleteTable(String table, String idx) {
 		nativesqlservice.deleteSQL(table, idx);
 	}
+	
+	@GetMapping(value="/MakeTable")
+	public String MakeTable(Model model) {
+		
+		return "thymeleaf/MakeTable";
+	}
+	
+	@RequestMapping(value="/tableList", method= RequestMethod.GET)
+	public ModelAndView tableList() {
+		ModelAndView tableListInfo = new ModelAndView();
+		tableListInfo.setView(new MappingJackson2JsonView());
+		
+		List<Object[]> selectAlltable = nativesqlservice.selectAlltable();
+		tableListInfo.addObject("masterTableInfo", selectAlltable);
+		
+		return tableListInfo;
+	}
 }

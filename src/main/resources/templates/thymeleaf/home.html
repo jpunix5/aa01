@@ -60,4 +60,34 @@
 	</main>
 
 </body>
+<script>
+	window.onload = showTableList();
+	function showTableList() {
+		$.ajax({
+			type: "GET",
+			url: "/tableList",
+			data : "table", 
+			success: function (tableListInfo) {
+				var listInfo = tableListInfo.masterTableInfo;
+				var listInfoLen = tableListInfo.masterTableInfo.length;
+				
+				var makeList = "";
+				makeList += "<ul>";
+				for(var i =0; i<listInfoLen; i++){
+					//makeList += "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/list.do\">"+listInfo[i]+"</a></li> ";
+					makeList += "<li class=\"nav-item\"><a class=\"nav-link\" href=\"\">"+listInfo[i]+"</a></li> ";
+				};
+				
+				
+				makeList += "</ul>";
+				$("#TableList_Body").html(makeList);
+				
+				var makeButton= "<button tpye=\"button\" onclick=\"location.href='/MakeTable'\" >Go Create Table</button> ";
+				$("#CreateTable").html(makeButton);
+				
+				
+			}
+		});
+	};
+</script>
 </html>
