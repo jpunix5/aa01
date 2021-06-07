@@ -53,10 +53,11 @@
 				}
 				
 	            for(var i=firstPage; i<=lastPage; i++){ //페이지를 설정하는 구간
-	            	str += "<li class=\"page-item\" id=\"pageLi"+i+"\"><a class=\"page-link\" href=\"#\" onclick=\"createtable('" + tableName + "', " + i + ", " + perPage + ")\">" + i + "</a></li>"
+	            	
 	            	if(i==nowPageNo){
-	            		$("#pageLi"+i).children().attr("style","color:red");
-	            		$("#pageLi"+i ).children().css('color','red');
+	            		str += "<li class=\"page-item\" id=\"pageLi"+i+"\"><a class=\"page-link\" href=\"#\" style=\"color:red\" onclick=\"createtable('" + tableName + "', " + i + ", " + perPage + ")\">" + i + "</a></li>"
+	            	} else {
+	            		str += "<li class=\"page-item\" id=\"pageLi"+i+"\"><a class=\"page-link\" href=\"#\" onclick=\"createtable('" + tableName + "', " + i + ", " + perPage + ")\">" + i + "</a></li>"
 	            	}
 	            }
 	            
