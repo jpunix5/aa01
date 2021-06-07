@@ -113,7 +113,7 @@ function checkAll() {
 		return true;
 	}
 
-	//아이디확인 함수
+	//아이디확인 함
 	function checkUserId(id) {
 		//id가 입력되었는지 확인
 		if (!checkExistData(id, "아이디를"))
