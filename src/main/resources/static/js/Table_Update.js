@@ -46,8 +46,7 @@ function updateData(idx, tableHeader, tableBody, tableName) {
       }
    };
    str += "<button type=\"button\" id=\"popupClose\" onclick=\"popUpClose()\">close</button>";
-   /*   str += "<button type=\"submit\" id=\"popupUpdate\" onclick=\"userUpdate(" + idx + ")\">update</button>";*/
-   str += "<button type=\"button\" onclick=\"checkAll()\">update</button>";
+   str += "<button type=\"button\" onclick=\"checkAll(" + idx + ", '" + tableName + "')\">update</button>";
    str += "</div>";
    str += "</form>";
 
@@ -75,7 +74,7 @@ function popUpClose() {
 };
 
 
-function checkAll() {
+function checkAll(idx,tableName) {
 
    var param = $('#Update_Form').serializeArray();
    for (var i = 0; i < param.length; i++) {
@@ -121,6 +120,9 @@ function checkAll() {
       }
 
    }
+   
+   //update 수행
+   userUpdate(idx,tableName);
 
    //아이디확인 함
    function checkUserId(id) {
@@ -169,5 +171,30 @@ function checkAll() {
       }
       return true; //확인이 완료되었을 때
    }
+};
 
+// update 수행
+function userUpdate(idx,tableName){
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+	
+	var updateValue = $("#Update_Form").serializeObject();
+	updateValue.tableName = tableName;
+	updateValue.idx=Update_Form.idx.value;
+	console.log(updateValue);
+	
+	$.ajax({
+	      type: "POST",
+	      url: "/ajaxUpdate",
+	      data: JSON.stringify(updateValue),
+	      contentType: "application/json",
+	      success: function (tName) {
+	    	  console.log(tName);
+	    	  $("#updatePopup").remove();
+	      }
+	});
 };
