@@ -1,36 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="board/layout/basic">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorator="board/layout/basic">
+   
 <head>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-	<meta name="_csrf" th:content="${_csrf.token}">
-	<meta name="_csrf_header" th:content="${_csrf.headerName}">
-	<meta charset="UTF-8">
-	<!-- ajax post / Spring Security -->
-	<meta name="_csrf" th:content="${_csrf.token}">
-	<meta name="_csrf_header" th:content="${_csrf.headerName}">
-
-	<title>MakeTable</title>
-	<h2>MakeTable Here</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<meta name="_csrf" th:content="${_csrf.token}">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta charset="UTF-8">
+<title>MakeTable</title>
+<h2>MakeTable Here</h2>
 </head>
-
 <body>
 	<form id="makeInfoForm">
-		<label>테이블명: <input id="test1" name="tableName" type="text"></label>
+		<label>테이블명: 
+			<input id="test1" name="tableName" type="text">
+		</label>
 		<br>
 	</form>
-
 	<button type="button" onclick="addObject()">항목추가</button>
 	<button type="button" onclick="createTable()">테이블 생성</button>
 </body>
-
 <script>
-	//컬럼 추가
 	var objectNum = 1;
 	function addObject(){
+		
+		
+		
 		var addSome = "<div id="+objectNum+">";
 		addSome += "항목명 : <input name=\"columnName"+ objectNum +"\" type=\"text\">";
 		addSome += "<select name=\"columnType"+ objectNum +"\">";
@@ -47,21 +43,23 @@
 		$("#makeInfoForm").append(addSome);
 	}
 	
-	//추가 된 컬럼 삭제
 	function objectDelete(idx){
 		$("#"+idx).remove();
 	}
 	
-	//테이블 생성
 	function createTable(){
+		
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		$(document).ajaxSend(function(e, xhr, options) {
 			xhr.setRequestHeader(header, token);
-		});
+		});//port로 전송할때 필요한거
 		
+	
 		var tableInfo = $("#makeInfoForm").serializeObject();
 		console.log(tableInfo);
+		
+		
 		
 		$.ajax({
 			url: "/ajaxCreateTable",
@@ -69,9 +67,10 @@
 			data: JSON.stringify(tableInfo),
 			contentType: "application/json",
 			success: function(result){
-				console.log(result);
+				
 			}
 		});
+		
 	}
 </script>
 <script  src="js/jquery.serializeObject.min.js"></script>
