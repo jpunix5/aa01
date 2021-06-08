@@ -12,4 +12,4 @@ function deletethis(idx, table) {
 		
 	});
 	window.location.reload();
-}
+} 

@@ -18,7 +18,7 @@ function userCreate(tableName) {
 		contentType: "application/json",
 		success: function (tableName) {
 			window.location.reload();
-		}		
+		}		 
 	});
 				
 };
