@@ -1,77 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-   layout:decorator="board/layout/basic">
-   
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="board/layout/basic">
+
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-<meta name="_csrf" th:content="${_csrf.token}">
-<meta name="_csrf_header" th:content="${_csrf.headerName}">
-<meta charset="UTF-8">
-<title>MakeTable</title>
-<h2>MakeTable Here</h2>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta charset="UTF-8">
+	<!-- ajax post / Spring Security -->
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+	<title>MakeTable</title>
+	<h2>MakeTable Here</h2>
 </head>
+
 <body>
 	<form id="makeInfoForm">
-		<label>테이블명: 
-			<input id="test1" name="항목제목" type="text">
-		</label>
+		<label>테이블명: <input id="test1" name="tableName" type="text"></label>
 		<br>
 	</form>
+
 	<button type="button" onclick="addObject()">항목추가</button>
 	<button type="button" onclick="createTable()">테이블 생성</button>
 </body>
+
 <script>
+	//컬럼 추가
 	var objectNum = 1;
 	function addObject(){
-		
-		var addSome = "";
-		
-		addSome += "항목명 : <input name=\"항목이름\" type=\"text\">";
-		addSome += "<select name=\"항목타입\">";
+		var addSome = "<div id="+objectNum+">";
+		addSome += "항목명 : <input name=\"columnName"+ objectNum +"\" type=\"text\">";
+		addSome += "<select name=\"columnType"+ objectNum +"\">";
 		addSome += "<optgroup label=\"항목의타입\">";
-		addSome += "<option value=\"int\" selected>INT</option>";
-		addSome += "<option value=\"varchar\">VARCHAR</option>";
+		addSome += "<option value=\"varchar(40)\" selected>VARCHAR</option>";
+		addSome += "<option value=\"int\">INT</option>";
 		addSome += "<option value=\"date\">DATE</option>";
 		addSome += "</optgroup>";
 		addSome += "</select>";
 		addSome += "<button type=\"button\" onclick=\"objectDelete("+objectNum+")\">항목삭제</button>";
-		addSome += "<br>";
-		
-		/* addSome += "<label id=\""+objectNum+"\">항목명 : <input type=\"text\">";
-		addSome += "<select name=\"항목타입\">";
-		addSome += "<optgroup label=\"항목의타입\">";
-		addSome += "<option value=\"int\" selected>INT</option>";
-		addSome += "<option value=\"varchar\">VARCHAR</option>";
-		addSome += "<option value=\"date\">DATE</option>";
-		addSome += "</optgroup>";
-		addSome += "</select>";
-		addSome += "<button type=\"button\" onclick=\"objectDelete("+objectNum+")\">항목삭제</button>";
-		addSome += "<br></label>"; */
+		addSome += "<\div>";
 		
 		objectNum += 1;
 		$("#makeInfoForm").append(addSome);
 	}
 	
+	//추가 된 컬럼 삭제
 	function objectDelete(idx){
 		$("#"+idx).remove();
 	}
 	
+	//테이블 생성
 	function createTable(){
-		
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		$(document).ajaxSend(function(e, xhr, options) {
 			xhr.setRequestHeader(header, token);
 		});
 		
-		var test1 = document.getElementById("test1").value;
-		
-		var tableInfo = $("#makeInfoForm").serialize();
-		//console.log(test1);
+		var tableInfo = $("#makeInfoForm").serializeObject();
 		console.log(tableInfo);
-		
-		
 		
 		$.ajax({
 			url: "/ajaxCreateTable",
@@ -79,10 +69,10 @@
 			data: JSON.stringify(tableInfo),
 			contentType: "application/json",
 			success: function(result){
-				
+				console.log(result);
 			}
 		});
-		
 	}
 </script>
+<script  src="js/jquery.serializeObject.min.js"></script>
 </html>

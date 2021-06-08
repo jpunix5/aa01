@@ -163,8 +163,123 @@ public class NativeSQLServiceImp implements NativeSQLService {
 
 	@Override
 	public List<Object[]> selectAlltable() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select distinct table_name from table_column");
+
+		Query query = em.createNativeQuery(sql.toString());
+		List<Object[]> tablelist = query.getResultList();
+
+		return tablelist;
+	}
+	
+	@Transactional
+	@Override
+	public String createTableSQL(HashMap<String, Object> tableInfo) {
+		StringBuilder sql = new StringBuilder();
+		StringBuilder sqlKey = new StringBuilder();
+		StringBuilder sqlValue = new StringBuilder();
+		String tableName = null;
+		
+		sql.append("create table ");
+		
+		for(String key : tableInfo.keySet()){
+			Object value = tableInfo.get(key);
+		    if("tableName" == key) {
+		    	tableName = value.toString();
+		    	sql.append(value);
+		    	sql.append(" ( `idx` int NOT NULL AUTO_INCREMENT,");
+		    }else {
+		    	sqlKey.append(key);
+		    	sqlKey.deleteCharAt((sqlKey.length()-1));
+		    	String StKey = sqlKey.toString();
+		    	
+		    	if("columnName".equals(StKey)) {
+		    		sqlValue.append(value);
+		    		sqlValue.append(" ");
+		    		
+		    		for(String chKey : tableInfo.keySet()){
+		    			Object targetValue = tableInfo.get(chKey);
+		    			
+		    			if(!(key==chKey)) {
+		    				if(key.charAt(key.length()-1)==chKey.charAt(chKey.length()-1)) {
+				    			sqlValue.append(targetValue);
+				    			sqlValue.append(",");
+				    		}
+		    			}
+			    	}
+		    	}
+		    	sqlKey.delete(0, sqlKey.length());
+		    }
+		};
+		
+		sql.append(sqlValue);
+		sql.append(" primary key(`idx`))");
+		
+		System.out.println(sql);
+        Query query = em.createNativeQuery(sql.toString());
+        query.executeUpdate();
+        
+		return "tableName";
+	}
+	
+	@Transactional
+	@Modifying
+	@Override
+	public String MasterTableAddSQL(HashMap<String, Object> tableInfo) {
+		StringBuilder sql = new StringBuilder();
+		StringBuilder sqlKey = new StringBuilder();
+		String tableName = null;
+		
+		for(String key : tableInfo.keySet()){
+			Object value = tableInfo.get(key);
+		    if("tableName" == key) {
+		    	tableName = value.toString();
+		    	break;
+		    }
+		}
+		
+		for(String key : tableInfo.keySet()){
+			sql.append("insert into table_column(table_name, column_name, column_type) values(");
+			sql.append("'");
+			sql.append(tableName);
+			sql.append("'");
+			sql.append(",");
+			
+			Object value = tableInfo.get(key);
+			
+			sqlKey.append(key);
+	    	sqlKey.deleteCharAt((sqlKey.length()-1));
+	    	String StKey = sqlKey.toString();
+			
+		    if("tableNam".equals(StKey)) {
+		    	
+		    }else if("columnName".equals(StKey)){
+		    	sql.append("'");
+		    	sql.append(value);
+		    	sql.append("'");
+		    	sql.append(",");
+		    	for(String chKey : tableInfo.keySet()){
+	    			Object targetValue = tableInfo.get(chKey);
+	    			
+	    			if(!(key==chKey)) {
+	    				if(key.charAt(key.length()-1)==chKey.charAt(chKey.length()-1)) {
+	    					sql.append("'");
+			    			sql.append(targetValue);
+			    			sql.append("'");
+			    			sql.append(")");
+			    			System.out.println(sql);
+			    			Query query = em.createNativeQuery(sql.toString());
+			    	        query.executeUpdate();
+			    		}
+	    			}
+		    	}
+		    	
+		    }
+		    sqlKey.delete(0, sqlKey.length());
+		    sql.delete(0, sql.length());
+		};
+		
+		return "a";
 	}
 
 }
