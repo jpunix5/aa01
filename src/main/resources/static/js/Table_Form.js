@@ -111,6 +111,19 @@
 		for (var k in tableHeader) {
 			if('idx' == tableHeader[k].columnname){
 				strbt += "<td><input type=" + tableHeader[k].columntype + " placeholder=" + tableHeader[k].columnname + " name=" + tableHeader[k].columnname + " hidden ></input></td>";
+			}else if(tableHeader[k].columnname == "user_email"){
+			strbt += "<td><input type='text' id='email'></input></td>";
+			strbt += "<td>@</td>";
+			strbt += "<td><input type='text' id='domain' value= ''></input></td>";
+			strbt += "<td><select id='selectEmail'>"
+			strbt += "<option value='1' selected>직접입력</option>"
+			strbt += "<option value='naver.com' >네이버</option>"
+			strbt += "<option value='gmail.com'>구글</option>"		
+			strbt += "</select></td>";
+
+//			strbt += "<td><customtag id='selectEmail' display='직접입력,네이버,구글' domain='1,naver.com,gmail.com'></customtag></td>";
+
+			strbt += "<td><input type=" + tableHeader[k].columntype + " id=" + tableHeader[k].columnname + " name=" + tableHeader[k].columnname + " hidden></input></td>";
 			}else{
 				strbt += "<td><input type=" + tableHeader[k].columntype + " placeholder=" + tableHeader[k].columnname + " name=" + tableHeader[k].columnname + "></input></td>";
 			}
@@ -128,6 +141,29 @@
 	
 		$("#Insert_Form").html(strbt);
 		$("#lineSelect").html(strbt2);
+		
+		$("#selectEmail").change(function(){
+			$("#selectEmail option:selected").each(function () {
+						if($(this).val()== '1'){ 						//직접입력일 경우
+							 $("#domain").val('');                 //값 초기화
+							 $("#domain").attr("disabled",false); 	//활성화
+						}else{ 											//직접입력이 아닐경우
+							 $("#domain").val($(this).val());     //선택값 입력
+							 $("#domain").attr("disabled",true); 	//비활성화
+						}
+				   });
+
+		});
+		
+				
+		$("button").focus(function(){
+			var my_email = "";
+				my_email += document.getElementById("email").value;
+				my_email += '@';
+				my_email += document.getElementById("domain").value;
+			
+			$("#user_email").val(my_email); 			
+		});
 	};
 	
 	function hyper_select(optional,tableName) {  //위에서 쓰일 hyper_select 함수.  여기선 위에서 받아온 option전부와 tableName을 가져왔다.
