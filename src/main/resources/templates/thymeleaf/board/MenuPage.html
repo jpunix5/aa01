@@ -107,8 +107,17 @@
       serializeObject.min.js : (Object to Json Object) Converter
       Board.js : view Board
 -->
+<script>
+$(document).ready(function(){
+	var address = unescape(location.href);
+	var tableName = "";
+	if(address.indexOf("table",0)!=-1){
+		tableName = address.substring(address.indexOf("table",0)+6);
+	}
+	createtable(tableName,1,3);
+});
+</script>
 <script  src="js/jquery.serializeObject.min.js"></script>
-
 <script  src="js/Table_Form.js"></script>
 <script  src="js/Table_Insert.js"></script>
 <script  src="js/Table_Update.js"></script>

@@ -45,6 +45,7 @@
 		<tbody id="CreateTable"></tbody>
 	</table>
 </body>
+<script  src="js/Table_Form.js"></script>
 <script>
 	window.onload = showTableList();
 	function showTableList() {
@@ -59,8 +60,8 @@
 				var makeList = "";
 				makeList += "<ul>";
 				for(var i =0; i<listInfoLen; i++){
-					makeList += "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/list.do\">"+listInfo[i]+"</a></li> ";
-					
+					makeList += "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"move('"+listInfo[i]+"')\">"+listInfo[i]+"</a></li> ";
+					//makeList += "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/list.do?tableName="+listInfo[i]+"\")\">"+listInfo[i]+"</a></li> ";
 				};
 				
 				
@@ -74,6 +75,11 @@
 			}
 		});
 	};
+	
+	function move(tableName){
+		location.href = "/list.do?table="+tableName;
+		//console.log(tableName);
+	}
 </script>
 
 </html>

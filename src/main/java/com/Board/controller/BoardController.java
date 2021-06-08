@@ -50,10 +50,8 @@ public class BoardController {
 		return "thymeleaf/home";
 	}
 	
-	@RequestMapping(value="/list.do")
-	public String list(@ModelAttribute TestUsersEntity board, Model model) {
-		List<TestUsersEntity> users = testusersservice.userlist();
-		model.addAttribute("users", users);
+	@RequestMapping(value="/list.do", method=RequestMethod.GET)
+	public String list(String tableName) {
 		
 		return "thymeleaf/board/MenuPage";
 	}
