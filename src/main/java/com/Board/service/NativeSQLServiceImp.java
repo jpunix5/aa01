@@ -235,6 +235,14 @@ public class NativeSQLServiceImp implements NativeSQLService {
 			    }
 			}
 			
+			sql.append("insert into table_column(table_name, column_name, column_type) values('");
+			sql.append(tableName);
+			sql.append("'");
+			sql.append(",");
+			sql.append("'idx','text')");
+			Query query2 = em.createNativeQuery(sql.toString());
+	        query2.executeUpdate();
+			
 			for(String key : tableInfo.keySet()){
 				sql.append("insert into table_column(table_name, column_name, column_type) values(");
 				sql.append("'");

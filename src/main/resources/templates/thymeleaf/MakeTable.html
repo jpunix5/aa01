@@ -18,7 +18,6 @@
 		</label>
 		<br>
 	</form>
-	<form>
 	<button type="button" onclick="addObject()">항목추가</button>
 	<button type="button" onclick="createTable()">테이블 생성</button>
 	</form>
@@ -59,9 +58,6 @@
 		
 	
 		var tableInfo = $("#makeInfoForm").serializeObject();
-		console.log(tableInfo);
-		
-		
 		
 		$.ajax({
 			url: "/ajaxCreateTable",
