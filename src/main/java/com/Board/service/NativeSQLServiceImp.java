@@ -261,7 +261,7 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		    			if(!(key==chKey)) {
 		    				if(key.charAt(key.length()-1)==chKey.charAt(chKey.length()-1)) {
 		    					sql.append("'");
-				    			sql.append(targetValue);
+				    			sql.append(targetValue); //vhar -> text로 수정
 				    			sql.append("'");
 				    			sql.append(")");
 				    			System.out.println(sql);
@@ -277,6 +277,33 @@ public class NativeSQLServiceImp implements NativeSQLService {
 			};
 			
 			return "a";
+		}
+		
+		@Transactional
+		@Override
+		public void dropThisTable(String tableName) {
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("drop table ");
+			sql.append(tableName);
+			
+			Query query = em.createNativeQuery(sql.toString());
+			query.executeUpdate();
+		}
+
+		@Transactional
+		@Override
+		public void deleteInMaster(String tableName) {
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("delete from table_column");
+			sql.append(" where table_name = ");
+			sql.append("'");
+			sql.append(tableName);
+			sql.append("'");
+			
+			Query query = em.createNativeQuery(sql.toString());
+			query.executeUpdate();
 		}
 	   
 	   

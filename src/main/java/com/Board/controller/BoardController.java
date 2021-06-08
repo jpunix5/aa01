@@ -1,32 +1,26 @@
 package com.Board.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.Board.service.NativeSQLService;
-import com.Board.service.TableColumnService;
-import com.Board.service.TestBoardService;
-import com.Board.service.TestUsersService;
 import com.Board.entities.TableColumnEntity;
 import com.Board.entities.TestBoardEntity;
 import com.Board.entities.TestUsersEntity;
 import com.Board.page.PageObject;
+import com.Board.service.NativeSQLService;
+import com.Board.service.TableColumnService;
+import com.Board.service.TestBoardService;
+import com.Board.service.TestUsersService;
 
 @Controller
 public class BoardController {
@@ -201,6 +195,8 @@ public class BoardController {
 		nativesqlservice.deleteSQL(table, idx);
 	}
 	
+	
+	
 	@GetMapping(value="/MakeTable")
 	public String MakeTable(Model model) {
 		
@@ -217,4 +213,6 @@ public class BoardController {
 		
 		return tableListInfo;
 	}
+	
+	
 }
