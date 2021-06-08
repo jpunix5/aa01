@@ -42,9 +42,13 @@ public class BoardAjaxController {
 	}
 	
 	@RequestMapping(value="ajaxCreateTable")
-	public void ajaxCreateTable(@RequestBody HashMap<String, Object> createValues) {
-		System.out.println(createValues);
-		//return nativesqlservice.createSQL(createValues);
+	public String ajaxCreateTable(@RequestBody HashMap<String, Object> tableInfo) {
+		System.out.println(tableInfo);
+		
+		nativesqlservice.createTableSQL(tableInfo);
+		nativesqlservice.MasterTableAddSQL(tableInfo);
+		
+		return "a"; 
 	}
 
 }

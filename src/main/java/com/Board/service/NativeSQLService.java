@@ -18,6 +18,8 @@ public interface NativeSQLService {
 
 	String updateSQL(HashMap<String, Object> updateValues);
 
-	String createSQL(HashMap<String, Object> createValues);
+	String MasterTableAddSQL(HashMap<String, Object> tableInfo);
+
+	String createTableSQL(HashMap<String, Object> tableInfo);
 
 }
