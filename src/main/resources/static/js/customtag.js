@@ -10,11 +10,11 @@ window.onload = function(){
 		}
 		
 		if(customtags[i].getAttribute("name") != undefined){
-			id = customtags[i].getAttribute("name");
+			name = customtags[i].getAttribute("name");
 		}
 		
 		if(customtags[i].getAttribute("onchange") != undefined){
-			id = customtags[i].getAttribute("onchange");
+			onchange = customtags[i].getAttribute("onchange");
 		}
 		var displays = customtags[i].getAttribute("display");
 		var domains = customtags[i].getAttribute("domain");
@@ -24,7 +24,7 @@ window.onload = function(){
 		
 		var html ="";
 
-		html += "<select>"
+		html += "<select id='" + id + "' name='" + name + "' onchange='"+ onchange+"'>"
 		for(var j = 0 ; j < display.length ; j++){
 			if(j == 1){
 				html += "<option value='" + domain[j] + "' selected>" + display[j] + "</option>";

@@ -113,16 +113,14 @@
 				strbt += "<td><input type=" + tableHeader[k].columntype + " placeholder=" + tableHeader[k].columnname + " name=" + tableHeader[k].columnname + " hidden ></input></td>";
 
 			}else if(tableHeader[k].columnname.indexOf("email") != -1){
-				strbt += "<td><input type='text' id='mymail'></input></td>";
+				strbt += "<td><input type='text' id='mymail' placeholder=" + tableHeader[k].columnname + "></input></td>";
 				strbt += "<td>@</td>";
-				strbt += "<td><input type='text' id='domain' value= ''></input></td>";
+				strbt += "<td><input type='text' id='domain' placeholder='domain' value=''></input></td>";
 				strbt += "<td><select id='selectmail'>"
 				strbt += "<option value='1' selected>직접입력</option>"
 				strbt += "<option value='naver.com' >네이버</option>"
 				strbt += "<option value='gmail.com'>구글</option>"		
 				strbt += "</select></td>";
-
-//			strbt += "<td><customtag id='selectEmail' display='직접입력,네이버,구글' domain='1,naver.com,gmail.com'></customtag></td>";
 
 			strbt += "<td><input type=" + tableHeader[k].columntype + " id=" + tableHeader[k].columnname + " name=" + tableHeader[k].columnname + " hidden></input></td>";
 			}else{
@@ -162,7 +160,7 @@
 				my_email += document.getElementById("mymail").value;
 				my_email += '@';
 				my_email += document.getElementById("domain").value;
-
+				
 			$("input[id*='email']").val(my_email);
 		});
 	};
