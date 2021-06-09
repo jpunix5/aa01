@@ -100,5 +100,24 @@ public class BoardController {
 		return tableListInfo;
 	}
 	
+	@RequestMapping(value="/ajaxtable.do", method = RequestMethod.GET)
+	   public ModelAndView ajaxtable(String table) {
+	      
+	      ModelAndView tablelist = new ModelAndView();
+	      tablelist.setView(new MappingJackson2JsonView());
+	      
+	      List<TableColumnEntity> tableinfo = tablecolumnservice.findByTable(table);
+	      tablelist.addObject("tableinfo", tableinfo);
+	      
+			/*
+			 * if ("test_users".equals(table)) { List<TestUsersEntity> users =
+			 * testusersservice.userlist(); tablelist.addObject("users", users); } else if
+			 * ("test_board".equals(table)) { List<TestBoardEntity> boards =
+			 * testboardservice.boardlist(); tablelist.addObject("users", boards); }
+			 */
+	      
+	      return tablelist;
+	   }
+	
 	
 }
