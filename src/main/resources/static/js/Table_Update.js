@@ -105,19 +105,7 @@ function checkAll(idx,tableName) {
          if (!checkUserName(Update_Form.user_name.value)) {
             return false;
          }
-      } else if (param_name == "title") {
-         if (!checkTitle(Update_Form.title.value)) {
-            return false;
-         }
-      } else if (param_name == "contant") {
-         if (!checkContant(Update_Form.contant.value)) {
-            return false;
-         }
-      } else if (param_name == "writer") {
-         if (!checkWriter(Update_Form.writer.value)) {
-            return false;
-         }
-      }
+      } 
 
    }
    

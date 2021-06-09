@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Board.entities.TestBoardEntity;
 import com.Board.service.NativeSQLService;
-import com.Board.service.TableColumnService;
-import com.Board.service.TestBoardService;
-import com.Board.service.TestUsersService;
 
 /*
  * ajax post 전송 처리를 위한 @RestController
@@ -44,8 +40,6 @@ public class BoardAjaxController {
 	
 	@RequestMapping(value="ajaxCreateTable")
 	public String ajaxCreateTable(@RequestBody HashMap<String, Object> tableInfo) {
-		System.out.println(tableInfo);
-		
 		nativesqlservice.createTableSQL(tableInfo);
 		nativesqlservice.MasterTableAddSQL(tableInfo);
 		
@@ -56,6 +50,5 @@ public class BoardAjaxController {
 	public void dropThisTable(String tableName) {
 		nativesqlservice.dropThisTable(tableName);
 		nativesqlservice.deleteInMaster(tableName);
-		//System.out.println(tableName);
 	}
 }

@@ -107,7 +107,6 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		sql.append(") values (");
 		sql.append(sqlValues);
 		sql.append(")");
-		System.out.println(sql);
 
 		Query query = em.createNativeQuery(sql.toString());
 		query.executeUpdate();
@@ -146,7 +145,7 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		sql.append(sqlValues);
 		sql.append(" where idx=");
 		sql.append(sqlidx);
-		System.out.println(sql);
+		
 
 		Query query = em.createNativeQuery(sql.toString());
 		query.executeUpdate();
@@ -209,7 +208,7 @@ public class NativeSQLServiceImp implements NativeSQLService {
 		sql.append(sqlValue);
 		sql.append(" primary key(`idx`))");
 
-		System.out.println(sql);
+		
 		Query query = em.createNativeQuery(sql.toString());
 		query.executeUpdate();
 
@@ -269,7 +268,6 @@ public class NativeSQLServiceImp implements NativeSQLService {
 							sql.append(targetValue); // vhar -> text로 수정
 							sql.append("'");
 							sql.append(")");
-							System.out.println(sql);
 							Query query = em.createNativeQuery(sql.toString());
 							query.executeUpdate();
 						}
