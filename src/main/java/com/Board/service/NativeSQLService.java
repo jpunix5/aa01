@@ -21,5 +21,8 @@ public interface NativeSQLService {
 	String MasterTableAddSQL(HashMap<String, Object> tableInfo);
 
 	String createTableSQL(HashMap<String, Object> tableInfo);
+	
+	void dropThisTable(String tableName);
+	void deleteInMaster(String tableName);
 
 }

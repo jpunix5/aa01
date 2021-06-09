@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Board.entities.TestBoardEntity;
@@ -50,5 +51,11 @@ public class BoardAjaxController {
 		
 		return "a"; 
 	}
-
+	
+	@RequestMapping(value="/dropThisTable", method = RequestMethod.GET)
+	public void dropThisTable(String tableName) {
+		nativesqlservice.dropThisTable(tableName);
+		nativesqlservice.deleteInMaster(tableName);
+		//System.out.println(tableName);
+	}
 }

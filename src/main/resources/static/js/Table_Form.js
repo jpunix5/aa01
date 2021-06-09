@@ -80,7 +80,7 @@
 		
 		$("#Table_Header").html(str);
 	};
-	
+	 
 	function TableBody(tableHeader, tableBody, tableName) {
 		var str = "";
 		
