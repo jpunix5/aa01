@@ -12,64 +12,64 @@
 <h2>MakeTable Here</h2>
 </head>
 <body>
-	<form id="makeInfoForm">
-		<label>테이블명: 
-			<input id="test1" name="tableName" type="text">
-		</label>
-		<br>
-	</form>
-	<button type="button" onclick="addObject()">항목추가</button>
-	<button type="button" onclick="createTable()">테이블 생성</button>
-	</form>
+   <form id="makeInfoForm">
+      <label>테이블명: 
+         <input id="test1" name="tableName" type="text">
+      </label>
+      <br>
+   </form>
+   <button type="button" onclick="addObject()">항목추가</button>
+   <button type="button" onclick="createTable()">테이블 생성</button>
+   </form>
 </body>
 <script>
-	var objectNum = 1;
-	function addObject(){
-		
-				var addSome = "<div id="+objectNum+">";
-				addSome += "항목명 : <input name=\"columnName"+ objectNum +"\" type=\"text\">";
-				addSome += "<select name=\"columnType"+ objectNum +"\">";
-				addSome += "<optgroup label=\"항목의타입\">";
-				addSome += "<option value=\"varchar(40)\" selected>VARCHAR</option>";
-				//addSome += "<option value=\"int\">INT</option>";
-				addSome += "<option value=\"date\">DATE</option>";
-				addSome += "</optgroup>";
-				addSome += "</select>";
-				addSome += "<button type=\"button\" onclick=\"objectDelete("+objectNum+")\">항목삭제</button>";
-				addSome += "<\div>";
-				
-				objectNum += 1;
-		
-		$("#makeInfoForm").append(addSome);
-		
-	}
-	
-	function objectDelete(idx){
-		$("#"+idx).remove();
-	}
-	
-	function createTable(){
-		
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});//port로 전송할때 필요한거
-		
-	
-		var tableInfo = $("#makeInfoForm").serializeObject();
-		
-		$.ajax({
-			url: "/ajaxCreateTable",
-			type: "POST",
-			data: JSON.stringify(tableInfo),
-			contentType: "application/json",
-			success: function(result){
-				window.location.href="/";
-			} 
-		});
-		
-	}
+   var objectNum = 1;
+   function addObject(){
+      
+            var addSome = "<div id="+objectNum+">";
+            addSome += "항목명 : <input name=\"columnName"+ objectNum +"\" type=\"text\">";
+            addSome += "<select name=\"columnType"+ objectNum +"\">";
+            addSome += "<optgroup label=\"항목의타입\">";
+            addSome += "<option value=\"text\" selected>VARCHAR</option>";
+            //addSome += "<option value=\"int\">INT</option>";
+            addSome += "<option value=\"Date\">DATE</option>";
+            addSome += "</optgroup>";
+            addSome += "</select>";
+            addSome += "<button type=\"button\" onclick=\"objectDelete("+objectNum+")\">항목삭제</button>";
+            addSome += "<\div>";
+            
+            objectNum += 1;
+      
+      $("#makeInfoForm").append(addSome);
+      
+   }
+   
+   function objectDelete(idx){
+      $("#"+idx).remove();
+   }
+   
+   function createTable(){
+      
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
+      $(document).ajaxSend(function(e, xhr, options) {
+         xhr.setRequestHeader(header, token);
+      });//port로 전송할때 필요한거
+      
+   
+      var tableInfo = $("#makeInfoForm").serializeObject();
+      
+      $.ajax({
+         url: "/ajaxCreateTable",
+         type: "POST",
+         data: JSON.stringify(tableInfo),
+         contentType: "application/json",
+         success: function(result){
+            window.location.href="/";
+         } 
+      });
+      
+   }
 </script>
 <script  src="js/jquery.serializeObject.min.js"></script>
 </html>
