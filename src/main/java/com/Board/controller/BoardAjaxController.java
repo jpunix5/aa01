@@ -18,7 +18,10 @@ import com.Board.service.TestUsersService;
  * ajax post 전송 처리를 위한 @RestController
  * 
  */
+/*test */
+//2021/01/21 Yun-S-
 @RestController
+//2021/01/21 Yun-E-
 public class BoardAjaxController {
 	
 	@Autowired
