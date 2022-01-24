@@ -18,6 +18,7 @@ import com.Board.service.TestUsersService;
  * ajax post 전송 처리를 위한 @RestController
  * 
  */
+/*test */
 @RestController
 public class BoardAjaxController {
 	
