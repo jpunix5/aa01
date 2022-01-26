@@ -14,6 +14,17 @@ import com.Board.service.TableColumnService;
 import com.Board.service.TestBoardService;
 import com.Board.service.TestUsersService;
 
+// start -------------------------
+// commit test를 위한 test code
+public class aaa {
+	private void syso() {
+		// TODO Auto-generated method stub
+		test test();
+	}
+}
+// end -------------------------
+
+
 /*
  * ajax post 전송 처리를 위한 @RestController
  * 
